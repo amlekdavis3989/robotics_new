@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amlek Chirayath Davis — Robotics Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070f;--surf:#0d0d1a;--surf2:#12121e;--surf3:#16162a;
+  --gold:#c9a96e;--gl:#e8c990;--gd:#7a6040;
+  --cream:#f0ead8;--muted:#50506a;--accent:#3d6b9e;
+  --green:#4ade80;--red:#f87171;--blue:#60a5fa;--yellow:#fbbf24;--orange:#f97316;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:#ccc8bc;font-family:'DM Mono',monospace;overflow-x:hidden;cursor:none;}
+
+.cur{width:7px;height:7px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+.cur-ring{width:30px;height:30px;border:1px solid rgba(201,169,110,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:1.4rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(7,7,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,.07);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;color:var(--gold);letter-spacing:.06em;}
+.nav-links{display:flex;gap:2.2rem;}
+.nav-links a{font-size:.63rem;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-pill{font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:.28rem .85rem;border:1px solid rgba(201,169,110,.22);color:var(--gd);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding:9rem 4rem 5rem;display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,169,110,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.018) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);pointer-events:none;}
+.eyebrow{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gd);display:flex;align-items:center;gap:1rem;margin-bottom:.8rem;}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--gd);}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.4rem);font-weight:300;line-height:1.07;color:var(--cream);margin-bottom:1.5rem;}
+h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:.77rem;line-height:2.1;color:var(--muted);max-width:440px;margin-bottom:2.4rem;}
+.btns{display:flex;gap:1.1rem;flex-wrap:wrap;}
+.btn-g{padding:.78rem 1.9rem;background:var(--gold);color:var(--bg);font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .3s;}
+.btn-g:hover{background:var(--gl);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,169,110,.2);}
+.btn-o{padding:.78rem 1.9rem;border:1px solid rgba(201,169,110,.28);color:var(--muted);font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .3s;}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);}
+
+/* profile card */
+.pcard{background:var(--surf2);border:1px solid rgba(201,169,110,.12);padding:1.9rem;}
+.pc-label{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);margin-bottom:1.1rem;}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;color:var(--cream);margin-bottom:.2rem;}
+.pc-role{font-size:.66rem;color:var(--gold);letter-spacing:.1em;margin-bottom:1.3rem;}
+.pc-div{height:1px;background:rgba(201,169,110,.1);margin-bottom:1.3rem;}
+.pc-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.3rem;}
+.chip{font-size:.54rem;letter-spacing:.11em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid rgba(201,169,110,.14);color:var(--gd);}
+.status-row{display:flex;align-items:center;gap:.55rem;font-size:.58rem;color:var(--muted);}
+.s-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(74,222,128,.6);animation:pls 2s infinite;}
+@keyframes pls{0%,100%{box-shadow:0 0 8px rgba(74,222,128,.6);}50%{box-shadow:0 0 14px rgba(74,222,128,.9);}}
+
+/* ── STATS ── */
+.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(201,169,110,.1);border-bottom:1px solid rgba(201,169,110,.1);background:var(--surf);}
+.stat{padding:1.9rem 1.5rem;text-align:center;border-right:1px solid rgba(201,169,110,.07);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--gold);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-l{font-size:.57rem;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);}
+
+/* ── SECTIONS ── */
+section{padding:5.5rem 4rem;}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.3rem);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:3rem;}
+h2 em{font-style:italic;color:var(--gold);}
+
+/* ── PROJECT GRID ── */
+.projects-section{background:var(--surf);}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(201,169,110,.08);}
+.proj-card{background:var(--bg);overflow:hidden;transition:background .3s;position:relative;}
+.proj-card:hover{background:var(--surf2);}
+.proj-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.proj-card:hover::after{transform:scaleX(1);}
+
+/* TABS */
+.proj-tabs{display:flex;border-bottom:1px solid rgba(201,169,110,.1);}
+.ptab{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.8rem 1.2rem;color:var(--muted);cursor:none;transition:all .3s;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;font-family:'DM Mono',monospace;}
+.ptab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.ptab:hover{color:var(--cream);}
+.proj-body{padding:2rem;}
+.tab-panel{display:none;animation:fadeIn .2s ease;}
+.tab-panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+
+/* INFO */
+.proj-num{font-size:.57rem;letter-spacing:.2em;color:var(--gd);margin-bottom:.9rem;}
+.proj-icon{font-size:1.75rem;margin-bottom:.75rem;display:block;}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;color:var(--cream);margin-bottom:.55rem;line-height:1.2;}
+.proj-desc{font-size:.72rem;line-height:1.9;color:var(--muted);margin-bottom:1.2rem;}
+.comp-label{font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.45rem;}
+.p-tags{display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:1.2rem;}
+.p-tag{font-size:.54rem;letter-spacing:.11em;text-transform:uppercase;padding:.2rem .62rem;border:1px solid rgba(201,169,110,.13);color:var(--gd);}
+.proj-link{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:color .3s;border-bottom:1px solid rgba(201,169,110,.1);padding-bottom:2px;}
+.proj-link:hover{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── WOKWI IFRAME SIMULATION ── */
+.wokwi-sim-wrap{position:relative;background:#1a1a2a;border:1px solid rgba(201,169,110,.15);}
+.wokwi-sim-header{background:#111128;padding:.7rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,169,110,.1);}
+.wokwi-logo-txt{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);display:flex;align-items:center;gap:.6rem;}
+.wokwi-dot{width:8px;height:8px;border-radius:50%;background:#4f46e5;}
+.wokwi-open-btn{font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:.28rem .8rem;border:1px solid rgba(79,70,229,.4);color:#818cf8;text-decoration:none;transition:all .3s;cursor:none;}
+.wokwi-open-btn:hover{border-color:#818cf8;background:rgba(79,70,229,.1);}
+.wokwi-iframe-container{position:relative;width:100%;height:400px;}
+.wokwi-iframe-container iframe{width:100%;height:100%;border:none;display:block;}
+.wokwi-iframe-container .iframe-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,.7);flex-direction:column;gap:1rem;transition:opacity .4s;}
+.wokwi-iframe-container .iframe-overlay.hidden{opacity:0;pointer-events:none;}
+.load-sim-btn{padding:.75rem 2rem;background:rgba(79,70,229,.15);border:1px solid rgba(79,70,229,.5);color:#818cf8;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;cursor:none;transition:all .3s;}
+.load-sim-btn:hover{background:rgba(79,70,229,.3);border-color:#818cf8;}
+.sim-hint{font-size:.6rem;color:var(--muted);text-align:center;max-width:220px;line-height:1.7;}
+
+/* WOKWI DIAGRAM */
+.diagram-panel{background:#1e1e1e;min-height:370px;display:flex;align-items:center;justify-content:center;position:relative;}
+.diagram-panel::before{content:'diagram.json';position:absolute;top:.65rem;left:.9rem;font-size:.55rem;color:#444;letter-spacing:.1em;}
+.wokwi-canvas{display:block;background:#1e1e1e;}
+
+/* CODE */
+.code-panel{background:#1e1e2e;padding:1.4rem;font-size:.67rem;line-height:1.75;overflow:auto;max-height:400px;}
+.code-panel::-webkit-scrollbar{width:4px;}.code-panel::-webkit-scrollbar-thumb{background:var(--gd);border-radius:2px;}
+.code-line{display:block;white-space:pre;}
+.ln{color:#3a3a55;user-select:none;margin-right:1.4rem;display:inline-block;width:22px;text-align:right;}
+.kw{color:#cba6f7;}.fn{color:#89b4fa;}.str{color:#a6e3a1;}.cm{color:#585b70;font-style:italic;}.num{color:#fab387;}.pp{color:#f38ba8;}.var{color:#cdd6f4;}.type{color:#f9e2af;}
+
+/* ── ROBOTICS ── */
+.rob-section{position:relative;overflow:hidden;}
+.rob-section::before{content:'ROB';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(8rem,17vw,14rem);color:rgba(201,169,110,.024);letter-spacing:-.05em;pointer-events:none;}
+.rob-layout{display:grid;grid-template-columns:270px 1fr;gap:5rem;align-items:start;position:relative;z-index:1;}
+.rob-intro{position:sticky;top:8rem;}
+.rob-intro p{font-size:.74rem;line-height:2.1;color:var(--muted);margin-bottom:1rem;}
+.rob-intro strong{color:var(--cream);font-weight:400;}
+.f-tags{display:flex;flex-wrap:wrap;gap:.42rem;margin-top:1.4rem;}
+.f-tag{font-size:.54rem;letter-spacing:.13em;text-transform:uppercase;padding:.28rem .75rem;background:rgba(201,169,110,.04);border:1px solid rgba(201,169,110,.12);color:var(--gd);}
+.modules{display:flex;flex-direction:column;}
+.module{border-top:1px solid rgba(201,169,110,.08);padding:1.6rem 0;display:grid;grid-template-columns:66px 1fr;gap:1.2rem;transition:padding .3s;}
+.module:last-child{border-bottom:1px solid rgba(201,169,110,.08);}
+.module:hover{padding-left:.7rem;}
+.mod-code{font-size:.57rem;letter-spacing:.2em;color:var(--gd);padding-top:.2rem;}
+.mod-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--cream);margin-bottom:.3rem;}
+.mod-desc{font-size:.7rem;line-height:1.85;color:var(--muted);}
+
+/* ── SKILLS ── */
+.skills-section{background:var(--surf);}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,169,110,.07);}
+.sk-block{background:var(--bg);padding:1.7rem;transition:background .3s;}
+.sk-block:hover{background:var(--surf2);}
+.sk-name{font-size:.65rem;letter-spacing:.11em;text-transform:uppercase;color:var(--cream);margin-bottom:.85rem;}
+.sk-bar{height:2px;background:rgba(201,169,110,.1);position:relative;margin-bottom:.38rem;}
+.sk-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gl));width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.sk-pct{font-size:.57rem;color:var(--gd);}
+
+/* ── CONTACT ── */
+.contact-section{text-align:center;position:relative;overflow:hidden;}
+.contact-section::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,110,.04),transparent 65%);pointer-events:none;}
+.c-inner{max-width:500px;margin:0 auto;position:relative;}
+.c-email{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.5vw,2.4rem);font-weight:300;color:var(--cream);text-decoration:none;display:block;margin:1.4rem 0 2rem;transition:color .3s;}
+.c-email:hover{color:var(--gold);}
+.c-sub{font-size:.72rem;line-height:2;color:var(--muted);}
+.soc-row{display:flex;justify-content:center;gap:1.5rem;margin-top:2rem;flex-wrap:wrap;}
+.soc-a{font-size:.59rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:all .3s;}
+.soc-a:hover{color:var(--gold);border-bottom-color:var(--gold);}
+
+footer{padding:1.5rem 4rem;border-top:1px solid rgba(201,169,110,.07);display:flex;justify-content:space-between;font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rv.show{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+@media(max-width:960px){
+  nav{padding:1.2rem 1.5rem;}.nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;}.pcard{display:none;}
+  section{padding:4rem 1.5rem;}
+  .stats-bar{grid-template-columns:repeat(3,1fr);}
+  .proj-grid,.sk-grid{grid-template-columns:1fr;}
+  .rob-layout{grid-template-columns:1fr;gap:2rem;}.rob-intro{position:static;}
+  footer{flex-direction:column;gap:.6rem;text-align:center;padding:1.3rem;}
+}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="cring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ACD — Robotics</div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#robotics">Robotics</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-pill">Wokwi Builder</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="eyebrow rv">Robotics Student &amp; Arduino Developer</div>
+    <h1 class="rv d1">Amlek<br>Chirayath<br><em>Davis</em></h1>
+    <p class="hero-sub rv d2">Building sensor-driven embedded systems that interact with the physical world. Specialising in Arduino automation, real-time PWM control, and Wokwi circuit simulation.</p>
+    <div class="btns rv d3">
+      <a href="#projects" class="btn-g">View Projects</a>
+      <a href="#contact" class="btn-o">Get in Touch</a>
+    </div>
+  </div>
+  <div class="pcard rv d2">
+    <div class="pc-label">Engineer Profile</div>
+    <div class="pc-name">Amlek Chirayath Davis</div>
+    <div class="pc-role">Robotics &amp; Embedded Systems</div>
+    <div class="pc-div"></div>
+    <div class="pc-chips">
+      <span class="chip">Arduino</span><span class="chip">C++</span>
+      <span class="chip">Wokwi</span><span class="chip">PIR</span>
+      <span class="chip">HC-SR04</span><span class="chip">LDR</span>
+      <span class="chip">LCD 16×2</span><span class="chip">Relay</span>
+      <span class="chip">PWM</span><span class="chip">Buttons</span>
+    </div>
+    <div class="pc-div"></div>
+    <div class="status-row"><span class="s-dot"></span>Available for Collaboration</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat rv"><span class="stat-n" data-c="5">0</span><span class="stat-l">Projects</span></div>
+  <div class="stat rv d1"><span class="stat-n" data-c="5">0</span><span class="stat-l">Sensor Types</span></div>
+  <div class="stat rv d2"><span class="stat-n" data-c="5">0</span><span class="stat-l">Live Wokwi Sims</span></div>
+  <div class="stat rv d3"><span class="stat-n" data-c="300">0</span><span class="stat-l">Lines of Code</span></div>
+  <div class="stat rv d3"><span class="stat-n" data-c="1">0</span><span class="stat-l">Sim Platform</span></div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="eyebrow rv">01 — Project Work</div>
+  <h2 class="rv d1">Five circuits,<br><em>five solutions</em></h2>
+  <div class="proj-grid">
+
+    <!-- ═══ helper macro: each project has tabs Info / Diagram / Code / Live Sim ═══ -->
+
+    <!-- ╔══════════════════════════════╗ -->
+    <!-- ║  P1 — PIR MOTION DETECTOR   ║ -->
+    <!-- ╚══════════════════════════════╝ -->
+    <div class="proj-card rv">
+      <div class="proj-tabs">
+        <button class="ptab active" onclick="tab(this,'p1','info')">Info</button>
+        <button class="ptab" onclick="tab(this,'p1','diagram')">Diagram</button>
+        <button class="ptab" onclick="tab(this,'p1','code')">Code</button>
+        <button class="ptab" onclick="tab(this,'p1','sim')">▶ Wokwi Sim</button>
+      </div>
+      <div class="proj-body">
+
+        <div id="p1-info" class="tab-panel active">
+          <div class="proj-num">P — 001</div><span class="proj-icon">🚨</span>
+          <div class="proj-title">PIR Motion Detector</div>
+          <div class="proj-desc">PIR sensor on D2 triggers LED on D13. Serial Monitor streams live state every 200ms. Foundational motion-sensing circuit.</div>
+          <div class="comp-label">Components</div>
+          <div class="p-tags"><span class="p-tag">Arduino Uno</span><span class="p-tag">PIR HC-SR501</span><span class="p-tag">LED</span><span class="p-tag">220Ω</span></div>
+          <a href="https://wokwi.com/projects/458379522403678209" target="_blank" class="proj-link">Open on Wokwi ↗</a>
+        </div>
+
+        <div id="p1-diagram" class="tab-panel">
+          <div class="diagram-panel">
+            <svg class="wokwi-canvas" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+              <rect width="520" height="360" fill="#1e1e1e"/>
+              <defs><pattern id="g1" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0L0 0 0 10" fill="none" stroke="#2a2a2a" stroke-width=".5"/></pattern></defs>
+              <rect width="520" height="360" fill="url(#g1)"/>
+              <!-- Arduino UNO -->
+              <g transform="translate(190,110)">
+                <rect width="130" height="170" rx="3" fill="#1a3a1a" stroke="#2d5a2d" stroke-width="1.5"/>
+                <rect x="32" y="55" width="66" height="48" rx="2" fill="#111" stroke="#333"/>
+                <text x="65" y="83" text-anchor="middle" fill="#777" font-family="DM Mono,monospace" font-size="7">ATmega328P</text>
+                <text x="65" y="28" text-anchor="middle" fill="#4a9a4a" font-family="DM Mono,monospace" font-size="8" font-weight="bold">Arduino Uno</text>
+                <rect x="45" y="160" width="40" height="8" rx="1" fill="#555"/>
+                <circle cx="18" cy="148" r="3.5" fill="#00cc00" opacity=".8"/>
+                <!-- pins left -->
+                <rect x="-5" y="36" width="5" height="4" fill="#999" rx="1"/>
+                <text x="-8" y="40" text-anchor="end" fill="#c9a96e" font-family="DM Mono,monospace" font-size="6.5">D2</text>
+                <rect x="-5" y="50" width="5" height="4" fill="#999" rx="1"/>
+                <text x="-8" y="54" text-anchor="end" fill="#c9a96e" font-family="DM Mono,monospace" font-size="6.5">D13</text>
+                <rect x="-5" y="105" width="5" height="4" fill="#c00" rx="1"/>
+                <text x="-8" y="109" text-anchor="end" fill="#f87171" font-family="DM Mono,monospace" font-size="6.5">5V</text>
+                <rect x="-5" y="120" width="5" height="4" fill="#333" rx="1"/>
+                <text x="-8" y="124" text-anchor="end" fill="#888" font-family="DM Mono,monospace" font-size="6.5">GND</text>
+              </g>
+              <!-- PIR sensor -->
+              <g transform="translate(38,75)">
+                <rect width="76" height="82" rx="4" fill="#1a1a3a" stroke="#4444aa" stroke-width="1.5"/>
+                <circle cx="38" cy="34" r="22" fill="#2a2a4a" stroke="#5555bb" stroke-width="1.5"/>
+                <circle cx="38" cy="34" r="14" fill="#1a1a3a" stroke="#4444aa"/>
+                <circle cx="38" cy="34" r="7" fill="#0a0a20"/>
+                <circle cx="38" cy="34" r="19" fill="none" stroke="#3a3a7a" stroke-width=".5" opacity=".5"/>
+                <text x="38" y="68" text-anchor="middle" fill="#6666cc" font-family="DM Mono,monospace" font-size="7.5" font-weight="bold">PIR</text>
+                <text x="38" y="78" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="6">HC-SR501</text>
+                <line x1="18" y1="82" x2="18" y2="92" stroke="#f87171" stroke-width="2"/>
+                <line x1="38" y1="82" x2="38" y2="92" stroke="#555" stroke-width="2"/>
+                <line x1="58" y1="82" x2="58" y2="92" stroke="#c9a96e" stroke-width="2"/>
+                <text x="18" y="100" text-anchor="middle" fill="#f87171" font-family="DM Mono,monospace" font-size="6">VCC</text>
+                <text x="38" y="100" text-anchor="middle" fill="#888" font-family="DM Mono,monospace" font-size="6">GND</text>
+                <text x="58" y="100" text-anchor="middle" fill="#c9a96e" font-family="DM Mono,monospace" font-size="6">OUT</text>
+              </g>
+              <!-- LED -->
+              <g transform="translate(390,95)">
+                <ellipse cx="18" cy="22" rx="15" ry="20" fill="#4a1515" stroke="#ff4444" stroke-width="1.5" id="pd1-led"/>
+                <path d="M5 38 Q18 48 31 38" fill="#3a1010" stroke="#ff4444" stroke-width="1"/>
+                <ellipse cx="12" cy="16" rx="4" ry="5" fill="white" opacity=".12"/>
+                <text x="18" y="58" text-anchor="middle" fill="#ff6666" font-family="DM Mono,monospace" font-size="7">LED</text>
+                <line x1="11" y1="44" x2="11" y2="68" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="25" y1="44" x2="25" y2="68" stroke="#bbb" stroke-width="1.5"/>
+              </g>
+              <!-- 220Ω resistor -->
+              <g transform="translate(383,190)">
+                <rect width="46" height="14" rx="4" fill="#3a2a14" stroke="#777" stroke-width="1"/>
+                <rect x="7" width="4" height="14" fill="#f00" rx="1"/>
+                <rect x="15" width="4" height="14" fill="#f00" rx="1"/>
+                <rect x="23" width="4" height="14" fill="#888" rx="1"/>
+                <rect x="32" width="4" height="14" fill="#ffd700" rx="1"/>
+                <line x1="-8" y1="7" x2="0" y2="7" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="46" y1="7" x2="54" y2="7" stroke="#bbb" stroke-width="1.5"/>
+                <text x="23" y="26" text-anchor="middle" fill="#888" font-family="DM Mono,monospace" font-size="6.5">220Ω</text>
+              </g>
+              <!-- WIRES -->
+              <!-- PIR OUT(D2) yellow -->
+              <path d="M96 157 L96 215 L185 215 L185 148" fill="none" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
+              <!-- PIR VCC red -->
+              <path d="M56 167 L56 270 L157 270 L157 232" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+              <!-- PIR GND black -->
+              <path d="M76 167 L76 285 L142 285 L142 247" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <!-- D13→resistor→LED green -->
+              <path d="M320 162 L370 162 L370 197" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/>
+              <path d="M437 197 L408 197 L408 163" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/>
+              <!-- LED GND black -->
+              <path d="M401 163 L401 310 L230 310 L230 247" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <!-- junction dots -->
+              <circle cx="185" cy="148" r="3" fill="#c9a96e"/>
+              <circle cx="157" cy="232" r="3" fill="#ef4444"/>
+              <text x="260" y="16" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="8">PIR Motion Detector — Wokwi Circuit</text>
+            </svg>
+          </div>
+        </div>
+
+        <div id="p1-code" class="tab-panel">
+          <div class="code-panel">
+<span class="code-line"><span class="ln">1</span><span class="cm">// PIR Motion Detector — wokwi.com/projects/458379522403678209</span></span>
+<span class="code-line"><span class="ln">2</span><span class="kw">const int</span> <span class="var">pirPin</span> = <span class="num">2</span>;   <span class="cm">// PIR OUT → D2</span></span>
+<span class="code-line"><span class="ln">3</span><span class="kw">const int</span> <span class="var">ledPin</span> = <span class="num">13</span>;  <span class="cm">// LED → D13</span></span>
+<span class="code-line"><span class="ln">4</span></span>
+<span class="code-line"><span class="ln">5</span><span class="kw">void</span> <span class="fn">setup</span>() {</span>
+<span class="code-line"><span class="ln">6</span>  <span class="fn">pinMode</span>(<span class="var">pirPin</span>, INPUT);</span>
+<span class="code-line"><span class="ln">7</span>  <span class="fn">pinMode</span>(<span class="var">ledPin</span>, OUTPUT);</span>
+<span class="code-line"><span class="ln">8</span>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</span>
+<span class="code-line"><span class="ln">9</span>}</span>
+<span class="code-line"><span class="ln">10</span><span class="kw">void</span> <span class="fn">loop</span>() {</span>
+<span class="code-line"><span class="ln">11</span>  <span class="kw">int</span> <span class="var">motionState</span> = <span class="fn">digitalRead</span>(<span class="var">pirPin</span>);</span>
+<span class="code-line"><span class="ln">12</span>  <span class="kw">if</span> (<span class="var">motionState</span> == HIGH) {</span>
+<span class="code-line"><span class="ln">13</span>    <span class="fn">digitalWrite</span>(<span class="var">ledPin</span>, HIGH);</span>
+<span class="code-line"><span class="ln">14</span>    Serial.<span class="fn">println</span>(<span class="str">"Motion detected - LED ON"</span>);</span>
+<span class="code-line"><span class="ln">15</span>  } <span class="kw">else</span> {</span>
+<span class="code-line"><span class="ln">16</span>    <span class="fn">digitalWrite</span>(<span class="var">ledPin</span>, LOW);</span>
+<span class="code-line"><span class="ln">17</span>    Serial.<span class="fn">println</span>(<span class="str">"No motion detected - LED OFF"</span>);</span>
+<span class="code-line"><span class="ln">18</span>  }</span>
+<span class="code-line"><span class="ln">19</span>  <span class="fn">delay</span>(<span class="num">200</span>);</span>
+<span class="code-line"><span class="ln">20</span>}</span>
+          </div>
+        </div>
+
+        <div id="p1-sim" class="tab-panel">
+          <div class="wokwi-sim-wrap">
+            <div class="wokwi-sim-header">
+              <div class="wokwi-logo-txt"><span class="wokwi-dot"></span>Wokwi Simulator — Live</div>
+              <a href="https://wokwi.com/projects/458379522403678209" target="_blank" class="wokwi-open-btn">Open Full ↗</a>
+            </div>
+            <div class="wokwi-iframe-container">
+              <iframe id="if-p1" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; cross-origin-isolated" allowfullscreen loading="lazy" title="P1 Wokwi Sim"></iframe>
+              <div class="iframe-overlay" id="ov-p1">
+                <button class="load-sim-btn" onclick="loadSim('p1','458379522403678209')">▶ Launch Wokwi Simulation</button>
+                <div class="sim-hint">Click to load the live Wokwi simulation. Runs directly inside the website.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════╗ -->
+    <!-- ║  P2 — HOME SECURITY         ║ -->
+    <!-- ╚══════════════════════════════╝ -->
+    <div class="proj-card rv d1">
+      <div class="proj-tabs">
+        <button class="ptab active" onclick="tab(this,'p2','info')">Info</button>
+        <button class="ptab" onclick="tab(this,'p2','diagram')">Diagram</button>
+        <button class="ptab" onclick="tab(this,'p2','code')">Code</button>
+        <button class="ptab" onclick="tab(this,'p2','sim')">▶ Wokwi Sim</button>
+      </div>
+      <div class="proj-body">
+        <div id="p2-info" class="tab-panel active">
+          <div class="proj-num">P — 002</div><span class="proj-icon">🏠</span>
+          <div class="proj-title">Home Security System</div>
+          <div class="proj-desc">PIR sensor triggers buzzer, LED, and 16×2 LCD showing "!! INTRUDER !!" or "System Armed" based on motion.</div>
+          <div class="comp-label">Components</div>
+          <div class="p-tags"><span class="p-tag">Arduino Uno</span><span class="p-tag">PIR HC-SR501</span><span class="p-tag">LCD 16×2</span><span class="p-tag">Buzzer</span><span class="p-tag">LED</span></div>
+          <a href="https://wokwi.com/projects/457101324157519873" target="_blank" class="proj-link">Open on Wokwi ↗</a>
+        </div>
+        <div id="p2-diagram" class="tab-panel">
+          <div class="diagram-panel">
+            <svg class="wokwi-canvas" viewBox="0 0 540 370" xmlns="http://www.w3.org/2000/svg">
+              <rect width="540" height="370" fill="#1e1e1e"/>
+              <rect width="540" height="370" fill="url(#g1)"/>
+              <!-- Arduino -->
+              <g transform="translate(195,120)">
+                <rect width="130" height="170" rx="3" fill="#1a3a1a" stroke="#2d5a2d" stroke-width="1.5"/>
+                <rect x="32" y="55" width="66" height="48" rx="2" fill="#111" stroke="#333"/>
+                <text x="65" y="83" text-anchor="middle" fill="#777" font-family="DM Mono,monospace" font-size="7">ATmega328P</text>
+                <text x="65" y="28" text-anchor="middle" fill="#4a9a4a" font-family="DM Mono,monospace" font-size="8" font-weight="bold">Arduino Uno</text>
+                <rect x="45" y="160" width="40" height="8" rx="1" fill="#555"/>
+                <circle cx="18" cy="148" r="3.5" fill="#00cc00" opacity=".8"/>
+                <rect x="-5" y="32" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="36" text-anchor="end" fill="#c9a96e" font-family="DM Mono,monospace" font-size="6">D2</text>
+                <rect x="-5" y="45" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="49" text-anchor="end" fill="#f97316" font-family="DM Mono,monospace" font-size="6">D8</text>
+                <rect x="-5" y="58" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="62" text-anchor="end" fill="#fbbf24" font-family="DM Mono,monospace" font-size="6">D9</text>
+                <rect x="-5" y="108" width="5" height="4" fill="#c00" rx="1"/><text x="-8" y="112" text-anchor="end" fill="#f87171" font-family="DM Mono,monospace" font-size="6">5V</text>
+                <rect x="-5" y="122" width="5" height="4" fill="#333" rx="1"/><text x="-8" y="126" text-anchor="end" fill="#888" font-family="DM Mono,monospace" font-size="6">GND</text>
+                <rect x="130" y="32" width="5" height="4" fill="#999" rx="1"/><text x="138" y="36" fill="#89b4fa" font-family="DM Mono,monospace" font-size="6">D3-7,10</text>
+              </g>
+              <!-- PIR -->
+              <g transform="translate(35,88)">
+                <rect width="74" height="80" rx="4" fill="#1a1a3a" stroke="#4444aa" stroke-width="1.5"/>
+                <circle cx="37" cy="33" r="21" fill="#2a2a4a" stroke="#5555bb" stroke-width="1.5"/>
+                <circle cx="37" cy="33" r="13" fill="#1a1a3a" stroke="#4444aa"/>
+                <circle cx="37" cy="33" r="6" fill="#0a0a20"/>
+                <text x="37" y="64" text-anchor="middle" fill="#6666cc" font-family="DM Mono,monospace" font-size="7.5" font-weight="bold">PIR</text>
+                <line x1="18" y1="80" x2="18" y2="90" stroke="#f87171" stroke-width="2"/>
+                <line x1="37" y1="80" x2="37" y2="90" stroke="#555" stroke-width="2"/>
+                <line x1="56" y1="80" x2="56" y2="90" stroke="#c9a96e" stroke-width="2"/>
+              </g>
+              <!-- LCD -->
+              <g transform="translate(353,55)">
+                <rect width="158" height="72" rx="4" fill="#2a3a2a" stroke="#3a5a3a" stroke-width="1.5"/>
+                <rect x="7" y="7" width="144" height="56" rx="2" fill="#1a2f1a"/>
+                <text x="18" y="29" fill="#90ee90" font-family="DM Mono,monospace" font-size="9.5" id="pd2-lcd1">System Armed   </text>
+                <text x="18" y="48" fill="#90ee90" font-family="DM Mono,monospace" font-size="9.5" id="pd2-lcd2">No Motion      </text>
+                <text x="79" y="87" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="6.5">LCD 16×2</text>
+              </g>
+              <!-- Buzzer -->
+              <g transform="translate(52,255)">
+                <circle cx="26" cy="26" r="26" fill="#2a1a00" stroke="#f97316" stroke-width="1.5"/>
+                <circle cx="26" cy="26" r="16" fill="#1a0a00" stroke="#ea580c"/>
+                <circle cx="26" cy="26" r="7" fill="#050200"/>
+                <text x="26" y="66" text-anchor="middle" fill="#f97316" font-family="DM Mono,monospace" font-size="6.5">BUZZER</text>
+                <line x1="16" y1="52" x2="16" y2="62" stroke="#555" stroke-width="2"/>
+                <line x1="36" y1="52" x2="36" y2="62" stroke="#f87171" stroke-width="2"/>
+              </g>
+              <!-- LED -->
+              <g transform="translate(420,215)">
+                <ellipse cx="15" cy="20" rx="13" ry="18" fill="#4a1515" stroke="#ff4444" stroke-width="1.5" id="pd2-led"/>
+                <ellipse cx="10" cy="14" rx="3" ry="4" fill="white" opacity=".12"/>
+                <text x="15" y="50" text-anchor="middle" fill="#ff6666" font-family="DM Mono,monospace" font-size="7">LED</text>
+                <line x1="8" y1="38" x2="8" y2="56" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="22" y1="38" x2="22" y2="56" stroke="#bbb" stroke-width="1.5"/>
+              </g>
+              <!-- WIRES -->
+              <path d="M91 168 L148 168 L148 152" fill="none" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
+              <path d="M53 168 L53 250 L155 250 L155 240" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+              <path d="M72 168 L72 265 L140 265 L140 255" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <path d="M190 165 L140 165 L140 281 L78 281" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+              <path d="M190 178 L170 178 L170 330 L435 330 L435 271" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+              <path d="M325 152 L353 91" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round"/>
+              <text x="270" y="16" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="8">Home Security System — Wokwi Circuit</text>
+            </svg>
+          </div>
+        </div>
+        <div id="p2-code" class="tab-panel">
+          <div class="code-panel">
+<span class="code-line"><span class="ln">1</span><span class="cm">// Home Security — wokwi.com/projects/457101324157519873</span></span>
+<span class="code-line"><span class="ln">2</span><span class="pp">#include</span> <span class="str">&lt;LiquidCrystal.h&gt;</span></span>
+<span class="code-line"><span class="ln">3</span>LiquidCrystal <span class="fn">lcd</span>(<span class="num">7</span>,<span class="num">6</span>,<span class="num">5</span>,<span class="num">4</span>,<span class="num">3</span>,<span class="num">10</span>);</span>
+<span class="code-line"><span class="ln">4</span><span class="kw">int</span> <span class="var">pirPin</span>=<span class="num">2</span>, <span class="var">buzzer</span>=<span class="num">8</span>, <span class="var">led</span>=<span class="num">9</span>;</span>
+<span class="code-line"><span class="ln">5</span></span>
+<span class="code-line"><span class="ln">6</span><span class="kw">void</span> <span class="fn">setup</span>() {</span>
+<span class="code-line"><span class="ln">7</span>  <span class="fn">pinMode</span>(<span class="var">pirPin</span>,INPUT); <span class="fn">pinMode</span>(<span class="var">buzzer</span>,OUTPUT); <span class="fn">pinMode</span>(<span class="var">led</span>,OUTPUT);</span>
+<span class="code-line"><span class="ln">8</span>  lcd.<span class="fn">begin</span>(<span class="num">16</span>,<span class="num">2</span>); lcd.<span class="fn">print</span>(<span class="str">"Home Security"</span>); <span class="fn">delay</span>(<span class="num">2000</span>); lcd.<span class="fn">clear</span>();</span>
+<span class="code-line"><span class="ln">9</span>}</span>
+<span class="code-line"><span class="ln">10</span><span class="kw">void</span> <span class="fn">loop</span>() {</span>
+<span class="code-line"><span class="ln">11</span>  <span class="kw">int</span> <span class="var">m</span> = <span class="fn">digitalRead</span>(<span class="var">pirPin</span>);</span>
+<span class="code-line"><span class="ln">12</span>  <span class="kw">if</span> (<span class="var">m</span> == HIGH) {</span>
+<span class="code-line"><span class="ln">13</span>    <span class="fn">digitalWrite</span>(<span class="var">buzzer</span>,HIGH); <span class="fn">digitalWrite</span>(<span class="var">led</span>,HIGH);</span>
+<span class="code-line"><span class="ln">14</span>    lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">0</span>); lcd.<span class="fn">print</span>(<span class="str">"!! INTRUDER !!"</span>);</span>
+<span class="code-line"><span class="ln">15</span>    lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">1</span>); lcd.<span class="fn">print</span>(<span class="str">"Motion Detected"</span>);</span>
+<span class="code-line"><span class="ln">16</span>  } <span class="kw">else</span> {</span>
+<span class="code-line"><span class="ln">17</span>    <span class="fn">digitalWrite</span>(<span class="var">buzzer</span>,LOW); <span class="fn">digitalWrite</span>(<span class="var">led</span>,LOW);</span>
+<span class="code-line"><span class="ln">18</span>    lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">0</span>); lcd.<span class="fn">print</span>(<span class="str">"System Armed   "</span>);</span>
+<span class="code-line"><span class="ln">19</span>    lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">1</span>); lcd.<span class="fn">print</span>(<span class="str">"No Motion      "</span>);</span>
+<span class="code-line"><span class="ln">20</span>  }</span>
+<span class="code-line"><span class="ln">21</span>  <span class="fn">delay</span>(<span class="num">500</span>);</span>
+<span class="code-line"><span class="ln">22</span>}</span>
+          </div>
+        </div>
+        <div id="p2-sim" class="tab-panel">
+          <div class="wokwi-sim-wrap">
+            <div class="wokwi-sim-header">
+              <div class="wokwi-logo-txt"><span class="wokwi-dot"></span>Wokwi Simulator — Live</div>
+              <a href="https://wokwi.com/projects/457101324157519873" target="_blank" class="wokwi-open-btn">Open Full ↗</a>
+            </div>
+            <div class="wokwi-iframe-container">
+              <iframe id="if-p2" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; cross-origin-isolated" allowfullscreen loading="lazy" title="P2 Wokwi Sim"></iframe>
+              <div class="iframe-overlay" id="ov-p2">
+                <button class="load-sim-btn" onclick="loadSim('p2','457101324157519873')">▶ Launch Wokwi Simulation</button>
+                <div class="sim-hint">Click to load the live Wokwi simulation. Runs directly inside the website.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════╗ -->
+    <!-- ║  P3 — WATER LEVEL           ║ -->
+    <!-- ╚══════════════════════════════╝ -->
+    <div class="proj-card rv">
+      <div class="proj-tabs">
+        <button class="ptab active" onclick="tab(this,'p3','info')">Info</button>
+        <button class="ptab" onclick="tab(this,'p3','diagram')">Diagram</button>
+        <button class="ptab" onclick="tab(this,'p3','code')">Code</button>
+        <button class="ptab" onclick="tab(this,'p3','sim')">▶ Wokwi Sim</button>
+      </div>
+      <div class="proj-body">
+        <div id="p3-info" class="tab-panel active">
+          <div class="proj-num">P — 003</div><span class="proj-icon">💧</span>
+          <div class="proj-title">Water Level Monitor</div>
+          <div class="proj-desc">HC-SR04 measures tank depth. Calculates % fill. LCD displays level. Relay auto-controls pump: ON &lt;30%, OFF &gt;90%.</div>
+          <div class="comp-label">Components</div>
+          <div class="p-tags"><span class="p-tag">Arduino Uno</span><span class="p-tag">HC-SR04</span><span class="p-tag">Relay</span><span class="p-tag">LCD 16×2</span><span class="p-tag">LED</span></div>
+          <a href="https://wokwi.com/projects/457050155667043329" target="_blank" class="proj-link">Open on Wokwi ↗</a>
+        </div>
+        <div id="p3-diagram" class="tab-panel">
+          <div class="diagram-panel">
+            <svg class="wokwi-canvas" viewBox="0 0 540 370" xmlns="http://www.w3.org/2000/svg">
+              <rect width="540" height="370" fill="#1e1e1e"/>
+              <rect width="540" height="370" fill="url(#g1)"/>
+              <!-- Arduino -->
+              <g transform="translate(195,115)">
+                <rect width="130" height="170" rx="3" fill="#1a3a1a" stroke="#2d5a2d" stroke-width="1.5"/>
+                <rect x="32" y="55" width="66" height="48" rx="2" fill="#111" stroke="#333"/>
+                <text x="65" y="83" text-anchor="middle" fill="#777" font-family="DM Mono,monospace" font-size="7">ATmega328P</text>
+                <text x="65" y="28" text-anchor="middle" fill="#4a9a4a" font-family="DM Mono,monospace" font-size="8" font-weight="bold">Arduino Uno</text>
+                <rect x="45" y="160" width="40" height="8" rx="1" fill="#555"/>
+                <circle cx="18" cy="148" r="3.5" fill="#00cc00" opacity=".8"/>
+                <rect x="-5" y="30" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="34" text-anchor="end" fill="#89b4fa" font-family="DM Mono,monospace" font-size="6">D9 Trig</text>
+                <rect x="-5" y="43" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="47" text-anchor="end" fill="#a6e3a1" font-family="DM Mono,monospace" font-size="6">D8 Echo</text>
+                <rect x="-5" y="56" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="60" text-anchor="end" fill="#f97316" font-family="DM Mono,monospace" font-size="6">D10 Relay</text>
+                <rect x="-5" y="69" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="73" text-anchor="end" fill="#fbbf24" font-family="DM Mono,monospace" font-size="6">D11 LED</text>
+                <rect x="-5" y="108" width="5" height="4" fill="#c00" rx="1"/><text x="-8" y="112" text-anchor="end" fill="#f87171" font-family="DM Mono,monospace" font-size="6">5V</text>
+                <rect x="-5" y="122" width="5" height="4" fill="#333" rx="1"/><text x="-8" y="126" text-anchor="end" fill="#888" font-family="DM Mono,monospace" font-size="6">GND</text>
+                <rect x="130" y="30" width="5" height="4" fill="#999" rx="1"/><text x="138" y="34" fill="#89b4fa" font-family="DM Mono,monospace" font-size="6">D2-7</text>
+              </g>
+              <!-- HC-SR04 -->
+              <g transform="translate(28,78)">
+                <rect width="88" height="62" rx="4" fill="#1a1a2a" stroke="#3d6b9e" stroke-width="1.5"/>
+                <circle cx="24" cy="31" r="17" fill="#0d0d1a" stroke="#4a7ab5" stroke-width="1.5"/>
+                <circle cx="24" cy="31" r="11" fill="#050510" stroke="#3a6aa5"/>
+                <circle cx="64" cy="31" r="17" fill="#0d0d1a" stroke="#4a7ab5" stroke-width="1.5"/>
+                <circle cx="64" cy="31" r="11" fill="#050510" stroke="#3a6aa5"/>
+                <text x="44" y="54" text-anchor="middle" fill="#89b4fa" font-family="DM Mono,monospace" font-size="6.5" font-weight="bold">HC-SR04</text>
+                <line x1="10" y1="62" x2="10" y2="72" stroke="#f87171" stroke-width="2"/>
+                <line x1="28" y1="62" x2="28" y2="72" stroke="#89b4fa" stroke-width="2"/>
+                <line x1="50" y1="62" x2="50" y2="72" stroke="#a6e3a1" stroke-width="2"/>
+                <line x1="70" y1="62" x2="70" y2="72" stroke="#555" stroke-width="2"/>
+                <text x="10" y="80" text-anchor="middle" fill="#f87171" font-family="DM Mono,monospace" font-size="5.5">VCC</text>
+                <text x="28" y="80" text-anchor="middle" fill="#89b4fa" font-family="DM Mono,monospace" font-size="5.5">Trig</text>
+                <text x="50" y="80" text-anchor="middle" fill="#a6e3a1" font-family="DM Mono,monospace" font-size="5.5">Echo</text>
+                <text x="70" y="80" text-anchor="middle" fill="#888" font-family="DM Mono,monospace" font-size="5.5">GND</text>
+              </g>
+              <!-- Relay -->
+              <g transform="translate(380,75)">
+                <rect width="95" height="65" rx="4" fill="#1a1a0a" stroke="#ca8a04" stroke-width="1.5"/>
+                <rect x="12" y="12" width="22" height="18" rx="2" fill="#0a0a00" stroke="#ca8a04"/>
+                <line x1="48" y1="18" x2="78" y2="18" stroke="#888" stroke-width="1.5"/>
+                <line x1="48" y1="28" x2="78" y2="28" stroke="#888" stroke-width="1.5"/>
+                <line x1="48" y1="38" x2="78" y2="38" stroke="#888" stroke-width="1.5"/>
+                <text x="47" y="58" text-anchor="middle" fill="#ca8a04" font-family="DM Mono,monospace" font-size="7.5" font-weight="bold">RELAY</text>
+                <line x1="24" y1="65" x2="24" y2="75" stroke="#f97316" stroke-width="2"/>
+                <line x1="65" y1="65" x2="65" y2="75" stroke="#555" stroke-width="2"/>
+              </g>
+              <!-- LCD -->
+              <g transform="translate(350,215)">
+                <rect width="158" height="70" rx="4" fill="#2a3a2a" stroke="#3a5a3a" stroke-width="1.5"/>
+                <rect x="7" y="7" width="144" height="54" rx="2" fill="#1a2f1a"/>
+                <text x="18" y="28" fill="#90ee90" font-family="DM Mono,monospace" font-size="9.5">Level: 55%     </text>
+                <text x="18" y="46" fill="#90ee90" font-family="DM Mono,monospace" font-size="9.5">Motor: OFF     </text>
+                <text x="79" y="85" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="6.5">LCD 16×2</text>
+              </g>
+              <!-- LED -->
+              <g transform="translate(62,285)">
+                <ellipse cx="13" cy="18" rx="12" ry="16" fill="#003a00" stroke="#4ade80" stroke-width="1.5" id="pd3-led"/>
+                <text x="13" y="46" text-anchor="middle" fill="#4ade80" font-family="DM Mono,monospace" font-size="6.5">LED</text>
+              </g>
+              <!-- WIRES -->
+              <path d="M28 150 L28 190 L190 190 L190 145" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round"/>
+              <path d="M50 150 L50 200 L175 200 L175 158" fill="none" stroke="#a6e3a1" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 150 L10 250 L157 250 L157 238" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+              <path d="M70 150 L70 265 L142 265 L142 253" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <path d="M190 171 L160 171 L160 115 L380 115" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+              <path d="M325 145 L350 250" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round"/>
+              <path d="M75 301 L75 340 L190 340 L190 184" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+              <text x="270" y="16" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="8">Water Level Monitor — Wokwi Circuit</text>
+            </svg>
+          </div>
+        </div>
+        <div id="p3-code" class="tab-panel">
+          <div class="code-panel">
+<span class="code-line"><span class="ln">1</span><span class="cm">// Water Level Monitor — wokwi.com/projects/457050155667043329</span></span>
+<span class="code-line"><span class="ln">2</span><span class="pp">#include</span> <span class="str">&lt;LiquidCrystal.h&gt;</span></span>
+<span class="code-line"><span class="ln">3</span>LiquidCrystal <span class="fn">lcd</span>(<span class="num">7</span>,<span class="num">6</span>,<span class="num">5</span>,<span class="num">4</span>,<span class="num">3</span>,<span class="num">2</span>);</span>
+<span class="code-line"><span class="ln">4</span><span class="kw">int</span> <span class="var">trig</span>=<span class="num">9</span>,<span class="var">echo</span>=<span class="num">8</span>,<span class="var">relay</span>=<span class="num">10</span>,<span class="var">led</span>=<span class="num">11</span>;</span>
+<span class="code-line"><span class="ln">5</span><span class="kw">long</span> <span class="var">duration</span>; <span class="kw">int</span> <span class="var">distance</span>; <span class="kw">int</span> <span class="var">tankHeight</span>=<span class="num">20</span>;</span>
+<span class="code-line"><span class="ln">6</span></span>
+<span class="code-line"><span class="ln">7</span><span class="kw">void</span> <span class="fn">setup</span>() {</span>
+<span class="code-line"><span class="ln">8</span>  <span class="fn">pinMode</span>(<span class="var">trig</span>,OUTPUT); <span class="fn">pinMode</span>(<span class="var">echo</span>,INPUT);</span>
+<span class="code-line"><span class="ln">9</span>  <span class="fn">pinMode</span>(<span class="var">relay</span>,OUTPUT); <span class="fn">pinMode</span>(<span class="var">led</span>,OUTPUT);</span>
+<span class="code-line"><span class="ln">10</span>  lcd.<span class="fn">begin</span>(<span class="num">16</span>,<span class="num">2</span>); lcd.<span class="fn">print</span>(<span class="str">"Water Controller"</span>);</span>
+<span class="code-line"><span class="ln">11</span>  <span class="fn">delay</span>(<span class="num">2000</span>); lcd.<span class="fn">clear</span>();</span>
+<span class="code-line"><span class="ln">12</span>}</span>
+<span class="code-line"><span class="ln">13</span><span class="kw">void</span> <span class="fn">loop</span>() {</span>
+<span class="code-line"><span class="ln">14</span>  <span class="fn">digitalWrite</span>(<span class="var">trig</span>,LOW); <span class="fn">delayMicroseconds</span>(<span class="num">2</span>);</span>
+<span class="code-line"><span class="ln">15</span>  <span class="fn">digitalWrite</span>(<span class="var">trig</span>,HIGH); <span class="fn">delayMicroseconds</span>(<span class="num">10</span>);</span>
+<span class="code-line"><span class="ln">16</span>  <span class="fn">digitalWrite</span>(<span class="var">trig</span>,LOW);</span>
+<span class="code-line"><span class="ln">17</span>  <span class="var">duration</span>=<span class="fn">pulseIn</span>(<span class="var">echo</span>,HIGH);</span>
+<span class="code-line"><span class="ln">18</span>  <span class="var">distance</span>=<span class="var">duration</span>*<span class="num">0.034</span>/<span class="num">2</span>;</span>
+<span class="code-line"><span class="ln">19</span>  <span class="kw">int</span> <span class="var">pct</span>=(<span class="var">tankHeight</span>-<span class="var">distance</span>)*<span class="num">100</span>/<span class="var">tankHeight</span>;</span>
+<span class="code-line"><span class="ln">20</span>  lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">0</span>); lcd.<span class="fn">print</span>(<span class="str">"Level: "</span>); lcd.<span class="fn">print</span>(<span class="var">pct</span>); lcd.<span class="fn">print</span>(<span class="str">"%  "</span>);</span>
+<span class="code-line"><span class="ln">21</span>  <span class="kw">if</span>(<span class="var">pct</span>&lt;<span class="num">30</span>){ <span class="fn">digitalWrite</span>(<span class="var">relay</span>,HIGH); lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">1</span>); lcd.<span class="fn">print</span>(<span class="str">"Motor: ON  "</span>); }</span>
+<span class="code-line"><span class="ln">22</span>  <span class="kw">else if</span>(<span class="var">pct</span>&gt;<span class="num">90</span>){ <span class="fn">digitalWrite</span>(<span class="var">relay</span>,LOW); lcd.<span class="fn">setCursor</span>(<span class="num">0</span>,<span class="num">1</span>); lcd.<span class="fn">print</span>(<span class="str">"Motor: OFF "</span>); }</span>
+<span class="code-line"><span class="ln">23</span>  <span class="fn">delay</span>(<span class="num">1000</span>);</span>
+<span class="code-line"><span class="ln">24</span>}</span>
+          </div>
+        </div>
+        <div id="p3-sim" class="tab-panel">
+          <div class="wokwi-sim-wrap">
+            <div class="wokwi-sim-header">
+              <div class="wokwi-logo-txt"><span class="wokwi-dot"></span>Wokwi Simulator — Live</div>
+              <a href="https://wokwi.com/projects/457050155667043329" target="_blank" class="wokwi-open-btn">Open Full ↗</a>
+            </div>
+            <div class="wokwi-iframe-container">
+              <iframe id="if-p3" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; cross-origin-isolated" allowfullscreen loading="lazy" title="P3 Wokwi Sim"></iframe>
+              <div class="iframe-overlay" id="ov-p3">
+                <button class="load-sim-btn" onclick="loadSim('p3','457050155667043329')">▶ Launch Wokwi Simulation</button>
+                <div class="sim-hint">Click to load the live Wokwi simulation. Runs directly inside the website.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════╗ -->
+    <!-- ║  P4 — LDR AUTO BRIGHTNESS   ║ -->
+    <!-- ╚══════════════════════════════╝ -->
+    <div class="proj-card rv d1">
+      <div class="proj-tabs">
+        <button class="ptab active" onclick="tab(this,'p4','info')">Info</button>
+        <button class="ptab" onclick="tab(this,'p4','diagram')">Diagram</button>
+        <button class="ptab" onclick="tab(this,'p4','code')">Code</button>
+        <button class="ptab" onclick="tab(this,'p4','sim')">▶ Wokwi Sim</button>
+      </div>
+      <div class="proj-body">
+        <div id="p4-info" class="tab-panel active">
+          <div class="proj-num">P — 004</div><span class="proj-icon">☀️</span>
+          <div class="proj-title">LDR Auto-Brightness</div>
+          <div class="proj-desc">LDR on A0 reads ambient light (0–1023). Inverted mapping to PWM (0–255) on D9. Bright room → dim LED. Dark room → full brightness.</div>
+          <div class="comp-label">Components</div>
+          <div class="p-tags"><span class="p-tag">Arduino Uno</span><span class="p-tag">LDR / Photoresistor</span><span class="p-tag">LED</span><span class="p-tag">10kΩ</span><span class="p-tag">220Ω</span></div>
+          <a href="https://wokwi.com/projects/458379892087600129" target="_blank" class="proj-link">Open on Wokwi ↗</a>
+        </div>
+        <div id="p4-diagram" class="tab-panel">
+          <div class="diagram-panel">
+            <svg class="wokwi-canvas" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+              <rect width="520" height="360" fill="#1e1e1e"/>
+              <rect width="520" height="360" fill="url(#g1)"/>
+              <!-- Arduino -->
+              <g transform="translate(188,110)">
+                <rect width="130" height="170" rx="3" fill="#1a3a1a" stroke="#2d5a2d" stroke-width="1.5"/>
+                <rect x="32" y="55" width="66" height="48" rx="2" fill="#111" stroke="#333"/>
+                <text x="65" y="83" text-anchor="middle" fill="#777" font-family="DM Mono,monospace" font-size="7">ATmega328P</text>
+                <text x="65" y="28" text-anchor="middle" fill="#4a9a4a" font-family="DM Mono,monospace" font-size="8" font-weight="bold">Arduino Uno</text>
+                <rect x="45" y="160" width="40" height="8" rx="1" fill="#555"/>
+                <circle cx="18" cy="148" r="3.5" fill="#00cc00" opacity=".8"/>
+                <rect x="-5" y="36" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="40" text-anchor="end" fill="#cba6f7" font-family="DM Mono,monospace" font-size="6.5">A0</text>
+                <rect x="-5" y="52" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="56" text-anchor="end" fill="#fbbf24" font-family="DM Mono,monospace" font-size="6.5">D9~</text>
+                <rect x="-5" y="106" width="5" height="4" fill="#c00" rx="1"/><text x="-8" y="110" text-anchor="end" fill="#f87171" font-family="DM Mono,monospace" font-size="6.5">5V</text>
+                <rect x="-5" y="120" width="5" height="4" fill="#333" rx="1"/><text x="-8" y="124" text-anchor="end" fill="#888" font-family="DM Mono,monospace" font-size="6.5">GND</text>
+              </g>
+              <!-- LDR -->
+              <g transform="translate(36,76)">
+                <rect width="78" height="78" rx="4" fill="#1a1a00" stroke="#ca8a04" stroke-width="1.5"/>
+                <polyline points="18,50 24,36 32,62 40,36 48,62 54,50" fill="none" stroke="#ca8a04" stroke-width="2"/>
+                <line x1="18" y1="22" x2="10" y2="11" stroke="#fbbf24" stroke-width="1.5"/><polygon points="10,11 15,15 7,15" fill="#fbbf24"/>
+                <line x1="34" y1="18" x2="26" y2="7" stroke="#fbbf24" stroke-width="1.5"/><polygon points="26,7 31,11 23,11" fill="#fbbf24"/>
+                <line x1="50" y1="22" x2="42" y2="11" stroke="#fbbf24" stroke-width="1.5"/><polygon points="42,11 47,15 39,15" fill="#fbbf24"/>
+                <text x="39" y="70" text-anchor="middle" fill="#ca8a04" font-family="DM Mono,monospace" font-size="7.5" font-weight="bold">LDR</text>
+                <line x1="24" y1="78" x2="24" y2="88" stroke="#bbb" stroke-width="2"/>
+                <line x1="54" y1="78" x2="54" y2="88" stroke="#bbb" stroke-width="2"/>
+              </g>
+              <!-- 10k pull-down -->
+              <g transform="translate(34,200)">
+                <rect width="44" height="13" rx="4" fill="#3a2a14" stroke="#777" stroke-width="1"/>
+                <rect x="7" width="4" height="13" fill="#8b4513" rx="1"/>
+                <rect x="14" width="4" height="13" fill="#111" rx="1"/>
+                <rect x="21" width="4" height="13" fill="#f97316" rx="1"/>
+                <rect x="30" width="4" height="13" fill="#ffd700" rx="1"/>
+                <line x1="-8" y1="6.5" x2="0" y2="6.5" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="44" y1="6.5" x2="52" y2="6.5" stroke="#bbb" stroke-width="1.5"/>
+                <text x="22" y="24" text-anchor="middle" fill="#888" font-family="DM Mono,monospace" font-size="6.5">10kΩ</text>
+              </g>
+              <!-- 220Ω -->
+              <g transform="translate(378,210)">
+                <rect width="44" height="13" rx="4" fill="#3a2a14" stroke="#777" stroke-width="1"/>
+                <rect x="7" width="4" height="13" fill="#f00" rx="1"/>
+                <rect x="15" width="4" height="13" fill="#f00" rx="1"/>
+                <rect x="23" width="4" height="13" fill="#888" rx="1"/>
+                <rect x="32" width="4" height="13" fill="#ffd700" rx="1"/>
+                <line x1="-8" y1="6.5" x2="0" y2="6.5" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="44" y1="6.5" x2="52" y2="6.5" stroke="#bbb" stroke-width="1.5"/>
+                <text x="22" y="24" text-anchor="middle" fill="#888" font-family="DM Mono,monospace" font-size="6.5">220Ω</text>
+              </g>
+              <!-- LED -->
+              <g transform="translate(455,110)">
+                <ellipse cx="17" cy="22" rx="14" ry="19" fill="#3a2200" stroke="#fbbf24" stroke-width="1.5" id="pd4-led"/>
+                <ellipse cx="11" cy="15" rx="4" ry="5" fill="white" opacity=".11"/>
+                <text x="17" y="54" text-anchor="middle" fill="#fbbf24" font-family="DM Mono,monospace" font-size="7">LED</text>
+                <text x="17" y="64" text-anchor="middle" fill="#ca8a04" font-family="DM Mono,monospace" font-size="5.5">PWM~</text>
+                <line x1="10" y1="41" x2="10" y2="60" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="24" y1="41" x2="24" y2="60" stroke="#bbb" stroke-width="1.5"/>
+              </g>
+              <!-- WIRES -->
+              <path d="M54 166 L54 195 L90 195 L90 150 L183 150 L183 148" fill="none" stroke="#cba6f7" stroke-width="2" stroke-linecap="round"/>
+              <path d="M66 166 L66 310 L158 310 L158 242" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+              <path d="M86 213 L142 213 L142 280 L153 280 L153 255" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <path d="M183 164 L165 164 L165 217 L370 217" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+              <path d="M430 217 L472 217 L472 151" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+              <path d="M462 300 L240 300 L240 255 L153 255" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <line x1="472" y1="300" x2="472" y2="310" stroke="#555" stroke-width="2"/>
+              <text x="260" y="16" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="8">LDR Auto-Brightness — Wokwi Circuit</text>
+            </svg>
+          </div>
+        </div>
+        <div id="p4-code" class="tab-panel">
+          <div class="code-panel">
+<span class="code-line"><span class="ln">1</span><span class="cm">// LDR Auto-Brightness — wokwi.com/projects/458379892087600129</span></span>
+<span class="code-line"><span class="ln">2</span><span class="kw">const int</span> <span class="var">ldrPin</span>=A0; <span class="cm">// Photoresistor</span></span>
+<span class="code-line"><span class="ln">3</span><span class="kw">const int</span> <span class="var">ledPin</span>=<span class="num">9</span>;  <span class="cm">// PWM output pin</span></span>
+<span class="code-line"><span class="ln">4</span></span>
+<span class="code-line"><span class="ln">5</span><span class="kw">void</span> <span class="fn">setup</span>() {</span>
+<span class="code-line"><span class="ln">6</span>  <span class="fn">pinMode</span>(<span class="var">ledPin</span>,OUTPUT);</span>
+<span class="code-line"><span class="ln">7</span>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</span>
+<span class="code-line"><span class="ln">8</span>}</span>
+<span class="code-line"><span class="ln">9</span><span class="kw">void</span> <span class="fn">loop</span>() {</span>
+<span class="code-line"><span class="ln">10</span>  <span class="kw">int</span> <span class="var">lightValue</span>=<span class="fn">analogRead</span>(<span class="var">ldrPin</span>); <span class="cm">// 0–1023</span></span>
+<span class="code-line"><span class="ln">11</span>  <span class="cm">// Invert: bright room → LED dim, dark room → LED bright</span></span>
+<span class="code-line"><span class="ln">12</span>  <span class="kw">int</span> <span class="var">brightness</span>=<span class="fn">map</span>(<span class="var">lightValue</span>,<span class="num">0</span>,<span class="num">1023</span>,<span class="num">255</span>,<span class="num">0</span>);</span>
+<span class="code-line"><span class="ln">13</span>  <span class="var">brightness</span>=<span class="fn">constrain</span>(<span class="var">brightness</span>,<span class="num">0</span>,<span class="num">255</span>);</span>
+<span class="code-line"><span class="ln">14</span>  <span class="fn">analogWrite</span>(<span class="var">ledPin</span>,<span class="var">brightness</span>);</span>
+<span class="code-line"><span class="ln">15</span>  Serial.<span class="fn">print</span>(<span class="str">"Light Sensor Value: "</span>); Serial.<span class="fn">print</span>(<span class="var">lightValue</span>);</span>
+<span class="code-line"><span class="ln">16</span>  Serial.<span class="fn">print</span>(<span class="str">" | LED Brightness: "</span>); Serial.<span class="fn">println</span>(<span class="var">brightness</span>);</span>
+<span class="code-line"><span class="ln">17</span>  <span class="fn">delay</span>(<span class="num">200</span>);</span>
+<span class="code-line"><span class="ln">18</span>}</span>
+          </div>
+        </div>
+        <div id="p4-sim" class="tab-panel">
+          <div class="wokwi-sim-wrap">
+            <div class="wokwi-sim-header">
+              <div class="wokwi-logo-txt"><span class="wokwi-dot"></span>Wokwi Simulator — Live</div>
+              <a href="https://wokwi.com/projects/458379892087600129" target="_blank" class="wokwi-open-btn">Open Full ↗</a>
+            </div>
+            <div class="wokwi-iframe-container">
+              <iframe id="if-p4" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; cross-origin-isolated" allowfullscreen loading="lazy" title="P4 Wokwi Sim"></iframe>
+              <div class="iframe-overlay" id="ov-p4">
+                <button class="load-sim-btn" onclick="loadSim('p4','458379892087600129')">▶ Launch Wokwi Simulation</button>
+                <div class="sim-hint">Click to load the live Wokwi simulation. Runs directly inside the website.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════╗ -->
+    <!-- ║  P5 — FAN SPEED CONTROLLER  ║ -->
+    <!-- ╚══════════════════════════════╝ -->
+    <div class="proj-card rv" style="grid-column:1/-1;">
+      <div class="proj-tabs">
+        <button class="ptab active" onclick="tab(this,'p5','info')">Info</button>
+        <button class="ptab" onclick="tab(this,'p5','diagram')">Diagram</button>
+        <button class="ptab" onclick="tab(this,'p5','code')">Code</button>
+        <button class="ptab" onclick="tab(this,'p5','sim')">▶ Wokwi Sim</button>
+      </div>
+      <div class="proj-body" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+
+        <div id="p5-info" class="tab-panel active" style="grid-column:1/-1">
+          <div class="proj-num">P — 005</div><span class="proj-icon">🌀</span>
+          <div class="proj-title">4-Speed Fan Controller</div>
+          <div class="proj-desc">Four push buttons (D2–D5) with INPUT_PULLUP control a PWM fan output on D9. Speeds: OFF (0), LOW (85/255), MEDIUM (170/255), HIGH (255/255). Serial Monitor logs each mode change.</div>
+          <div class="comp-label">Components</div>
+          <div class="p-tags"><span class="p-tag">Arduino Uno</span><span class="p-tag">4× Push Buttons</span><span class="p-tag">PWM Fan (D9)</span><span class="p-tag">4× 10kΩ Pull-up</span><span class="p-tag">Serial Monitor</span></div>
+          <a href="https://wokwi.com/projects/458380907208992769" target="_blank" class="proj-link">Open on Wokwi ↗</a>
+        </div>
+
+        <div id="p5-diagram" class="tab-panel" style="grid-column:1/-1">
+          <div class="diagram-panel" style="min-height:400px">
+            <svg class="wokwi-canvas" viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+              <rect width="680" height="400" fill="#1e1e1e"/>
+              <rect width="680" height="400" fill="url(#g1)"/>
+              <!-- Arduino -->
+              <g transform="translate(255,115)">
+                <rect width="140" height="185" rx="3" fill="#1a3a1a" stroke="#2d5a2d" stroke-width="1.5"/>
+                <rect x="38" y="62" width="66" height="48" rx="2" fill="#111" stroke="#333"/>
+                <text x="70" y="90" text-anchor="middle" fill="#777" font-family="DM Mono,monospace" font-size="7">ATmega328P</text>
+                <text x="70" y="30" text-anchor="middle" fill="#4a9a4a" font-family="DM Mono,monospace" font-size="8" font-weight="bold">Arduino Uno</text>
+                <rect x="50" y="174" width="42" height="9" rx="1" fill="#555"/>
+                <circle cx="20" cy="158" r="3.5" fill="#00cc00" opacity=".8"/>
+                <!-- pins left (buttons) -->
+                <rect x="-5" y="30" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="34" text-anchor="end" fill="#f87171" font-family="DM Mono,monospace" font-size="6">D2 OFF</text>
+                <rect x="-5" y="44" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="48" text-anchor="end" fill="#4ade80" font-family="DM Mono,monospace" font-size="6">D3 LOW</text>
+                <rect x="-5" y="58" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="62" text-anchor="end" fill="#fbbf24" font-family="DM Mono,monospace" font-size="6">D4 MED</text>
+                <rect x="-5" y="72" width="5" height="4" fill="#999" rx="1"/><text x="-8" y="76" text-anchor="end" fill="#f97316" font-family="DM Mono,monospace" font-size="6">D5 HIGH</text>
+                <rect x="-5" y="120" width="5" height="4" fill="#c00" rx="1"/><text x="-8" y="124" text-anchor="end" fill="#f87171" font-family="DM Mono,monospace" font-size="6">5V</text>
+                <rect x="-5" y="135" width="5" height="4" fill="#333" rx="1"/><text x="-8" y="139" text-anchor="end" fill="#888" font-family="DM Mono,monospace" font-size="6">GND</text>
+                <!-- right pin fan -->
+                <rect x="140" y="58" width="5" height="4" fill="#999" rx="1"/><text x="148" y="62" fill="#89b4fa" font-family="DM Mono,monospace" font-size="6">D9~ Fan</text>
+              </g>
+              <!-- 4 buttons side by side -->
+              <!-- BTN OFF (D2) -->
+              <g transform="translate(28,85)">
+                <rect width="42" height="42" rx="3" fill="#2a1a1a" stroke="#f87171" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="12" fill="#1a0a0a" stroke="#f87171" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="7" fill="#3a1515"/>
+                <text x="21" y="56" text-anchor="middle" fill="#f87171" font-family="DM Mono,monospace" font-size="6.5">OFF</text>
+                <line x1="7" y1="42" x2="7" y2="52" stroke="#555" stroke-width="1.5"/>
+                <line x1="35" y1="42" x2="35" y2="52" stroke="#f87171" stroke-width="1.5"/>
+              </g>
+              <!-- BTN LOW (D3) -->
+              <g transform="translate(82,85)">
+                <rect width="42" height="42" rx="3" fill="#1a2a1a" stroke="#4ade80" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="12" fill="#0a1a0a" stroke="#4ade80" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="7" fill="#153515"/>
+                <text x="21" y="56" text-anchor="middle" fill="#4ade80" font-family="DM Mono,monospace" font-size="6.5">LOW</text>
+                <line x1="7" y1="42" x2="7" y2="52" stroke="#555" stroke-width="1.5"/>
+                <line x1="35" y1="42" x2="35" y2="52" stroke="#4ade80" stroke-width="1.5"/>
+              </g>
+              <!-- BTN MED (D4) -->
+              <g transform="translate(136,85)">
+                <rect width="42" height="42" rx="3" fill="#2a2a1a" stroke="#fbbf24" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="12" fill="#1a1a0a" stroke="#fbbf24" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="7" fill="#353515"/>
+                <text x="21" y="56" text-anchor="middle" fill="#fbbf24" font-family="DM Mono,monospace" font-size="6.5">MED</text>
+                <line x1="7" y1="42" x2="7" y2="52" stroke="#555" stroke-width="1.5"/>
+                <line x1="35" y1="42" x2="35" y2="52" stroke="#fbbf24" stroke-width="1.5"/>
+              </g>
+              <!-- BTN HIGH (D5) -->
+              <g transform="translate(190,85)">
+                <rect width="42" height="42" rx="3" fill="#2a1a0a" stroke="#f97316" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="12" fill="#1a0a00" stroke="#f97316" stroke-width="1.5"/>
+                <circle cx="21" cy="21" r="7" fill="#351505"/>
+                <text x="21" y="56" text-anchor="middle" fill="#f97316" font-family="DM Mono,monospace" font-size="6.5">HIGH</text>
+                <line x1="7" y1="42" x2="7" y2="52" stroke="#555" stroke-width="1.5"/>
+                <line x1="35" y1="42" x2="35" y2="52" stroke="#f97316" stroke-width="1.5"/>
+              </g>
+              <!-- FAN (PWM output visualization) -->
+              <g transform="translate(468,90)">
+                <circle cx="60" cy="60" r="55" fill="#0a0a1a" stroke="#89b4fa" stroke-width="2"/>
+                <circle cx="60" cy="60" r="40" fill="#050510" stroke="#3d6b9e"/>
+                <!-- fan blades -->
+                <g id="fan-blades" transform-origin="60 60">
+                  <ellipse cx="60" cy="28" rx="10" ry="20" fill="#3d6b9e" opacity=".8" transform="rotate(0 60 60)"/>
+                  <ellipse cx="60" cy="28" rx="10" ry="20" fill="#3d6b9e" opacity=".8" transform="rotate(90 60 60)"/>
+                  <ellipse cx="60" cy="28" rx="10" ry="20" fill="#3d6b9e" opacity=".8" transform="rotate(180 60 60)"/>
+                  <ellipse cx="60" cy="28" rx="10" ry="20" fill="#3d6b9e" opacity=".8" transform="rotate(270 60 60)"/>
+                </g>
+                <circle cx="60" cy="60" r="8" fill="#1a1a3a" stroke="#89b4fa"/>
+                <text x="60" y="138" text-anchor="middle" fill="#89b4fa" font-family="DM Mono,monospace" font-size="7.5" font-weight="bold">FAN (PWM D9)</text>
+                <text x="60" y="150" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="6" id="fan-speed-lbl">Speed: OFF</text>
+              </g>
+              <!-- Serial monitor box -->
+              <g transform="translate(468,265)">
+                <rect width="160" height="80" rx="3" fill="#0a0a14" stroke="#2a2a4a" stroke-width="1"/>
+                <rect width="160" height="16" rx="3" fill="#1a1a2a"/>
+                <text x="80" y="11" text-anchor="middle" fill="#89b4fa" font-family="DM Mono,monospace" font-size="7">Serial Monitor</text>
+                <text x="8" y="30" fill="#4ade80" font-family="DM Mono,monospace" font-size="7" id="fan-serial1">Fan OFF</text>
+                <text x="8" y="44" fill="#585b70" font-family="DM Mono,monospace" font-size="7">@ 9600 baud</text>
+              </g>
+              <!-- WIRES buttons → Arduino -->
+              <path d="M63 137 L63 250 L250 250 L250 147" fill="none" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+              <path d="M117 137 L117 260 L235 260 L235 161" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/>
+              <path d="M171 137 L171 270 L220 270 L220 175" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+              <path d="M225 137 L225 280 L205 280 L205 189" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+              <!-- D9 → fan -->
+              <path d="M395 178 L440 178 L440 150 L468 150" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round"/>
+              <!-- GND buses -->
+              <path d="M35 137 L35 295 L150 295 L150 247" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4,2"/>
+              <text x="340" y="16" text-anchor="middle" fill="#555" font-family="DM Mono,monospace" font-size="8">4-Speed Fan Controller — Wokwi Circuit</text>
+            </svg>
+          </div>
+        </div>
+
+        <div id="p5-code" class="tab-panel" style="grid-column:1/-1">
+          <div class="code-panel">
+<span class="code-line"><span class="ln">1</span><span class="cm">// 4-Speed Fan Controller — wokwi.com/projects/458380907208992769</span></span>
+<span class="code-line"><span class="ln">2</span><span class="kw">const int</span> <span class="var">btnOff</span>=<span class="num">2</span>, <span class="var">btnLow</span>=<span class="num">3</span>, <span class="var">btnMed</span>=<span class="num">4</span>, <span class="var">btnHigh</span>=<span class="num">5</span>;</span>
+<span class="code-line"><span class="ln">3</span><span class="kw">const int</span> <span class="var">fanPin</span>=<span class="num">9</span>;   <span class="cm">// PWM output to fan</span></span>
+<span class="code-line"><span class="ln">4</span><span class="kw">int</span> <span class="var">fanSpeed</span>=<span class="num">0</span>;     <span class="cm">// 0 to 255</span></span>
+<span class="code-line"><span class="ln">5</span></span>
+<span class="code-line"><span class="ln">6</span><span class="kw">void</span> <span class="fn">setup</span>() {</span>
+<span class="code-line"><span class="ln">7</span>  <span class="fn">pinMode</span>(<span class="var">btnOff</span>,INPUT_PULLUP);  <span class="fn">pinMode</span>(<span class="var">btnLow</span>,INPUT_PULLUP);</span>
+<span class="code-line"><span class="ln">8</span>  <span class="fn">pinMode</span>(<span class="var">btnMed</span>,INPUT_PULLUP);  <span class="fn">pinMode</span>(<span class="var">btnHigh</span>,INPUT_PULLUP);</span>
+<span class="code-line"><span class="ln">9</span>  <span class="fn">pinMode</span>(<span class="var">fanPin</span>,OUTPUT);</span>
+<span class="code-line"><span class="ln">10</span>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</span>
+<span class="code-line"><span class="ln">11</span>}</span>
+<span class="code-line"><span class="ln">12</span></span>
+<span class="code-line"><span class="ln">13</span><span class="kw">void</span> <span class="fn">loop</span>() {</span>
+<span class="code-line"><span class="ln">14</span>  <span class="kw">if</span>(<span class="fn">digitalRead</span>(<span class="var">btnOff</span>)==LOW){</span>
+<span class="code-line"><span class="ln">15</span>    <span class="var">fanSpeed</span>=<span class="num">0</span>; Serial.<span class="fn">println</span>(<span class="str">"Fan OFF"</span>); <span class="fn">delay</span>(<span class="num">200</span>);</span>
+<span class="code-line"><span class="ln">16</span>  }</span>
+<span class="code-line"><span class="ln">17</span>  <span class="kw">if</span>(<span class="fn">digitalRead</span>(<span class="var">btnLow</span>)==LOW){</span>
+<span class="code-line"><span class="ln">18</span>    <span class="var">fanSpeed</span>=<span class="num">85</span>; Serial.<span class="fn">println</span>(<span class="str">"Fan LOW speed"</span>); <span class="fn">delay</span>(<span class="num">200</span>);</span>
+<span class="code-line"><span class="ln">19</span>  }</span>
+<span class="code-line"><span class="ln">20</span>  <span class="kw">if</span>(<span class="fn">digitalRead</span>(<span class="var">btnMed</span>)==LOW){</span>
+<span class="code-line"><span class="ln">21</span>    <span class="var">fanSpeed</span>=<span class="num">170</span>; Serial.<span class="fn">println</span>(<span class="str">"Fan MEDIUM speed"</span>); <span class="fn">delay</span>(<span class="num">200</span>);</span>
+<span class="code-line"><span class="ln">22</span>  }</span>
+<span class="code-line"><span class="ln">23</span>  <span class="kw">if</span>(<span class="fn">digitalRead</span>(<span class="var">btnHigh</span>)==LOW){</span>
+<span class="code-line"><span class="ln">24</span>    <span class="var">fanSpeed</span>=<span class="num">255</span>; Serial.<span class="fn">println</span>(<span class="str">"Fan HIGH speed"</span>); <span class="fn">delay</span>(<span class="num">200</span>);</span>
+<span class="code-line"><span class="ln">25</span>  }</span>
+<span class="code-line"><span class="ln">26</span>  <span class="fn">analogWrite</span>(<span class="var">fanPin</span>,<span class="var">fanSpeed</span>);</span>
+<span class="code-line"><span class="ln">27</span>}</span>
+          </div>
+        </div>
+
+        <div id="p5-sim" class="tab-panel" style="grid-column:1/-1">
+          <div class="wokwi-sim-wrap">
+            <div class="wokwi-sim-header">
+              <div class="wokwi-logo-txt"><span class="wokwi-dot"></span>Wokwi Simulator — Live (Fan Speed Controller)</div>
+              <a href="https://wokwi.com/projects/458380907208992769" target="_blank" class="wokwi-open-btn">Open Full ↗</a>
+            </div>
+            <div class="wokwi-iframe-container" style="height:500px">
+              <iframe id="if-p5" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; cross-origin-isolated" allowfullscreen loading="lazy" title="P5 Wokwi Sim"></iframe>
+              <div class="iframe-overlay" id="ov-p5">
+                <button class="load-sim-btn" onclick="loadSim('p5','458380907208992769')">▶ Launch Wokwi Simulation</button>
+                <div class="sim-hint">Click to load the live Wokwi simulation. Press the 4 buttons inside to control fan speed. Runs directly inside the website.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /proj-grid -->
+</section>
+
+<!-- ROBOTICS -->
+<section id="robotics" class="rob-section">
+  <div class="eyebrow rv">02 — Subject Details</div>
+  <h2 class="rv d1">The science of <em>Robotics</em></h2>
+  <div class="rob-layout">
+    <div class="rob-intro rv d2">
+      <p>Robotics combines <strong>electronics</strong>, <strong>programming</strong>, and <strong>system design</strong> to build machines that sense and respond to their environment.</p>
+      <p>All five projects demonstrate distinct robotics sub-skills — from binary sensing and PWM proportional control to multi-input button debouncing and automated feedback loops.</p>
+      <div class="f-tags">
+        <span class="f-tag">Arduino</span><span class="f-tag">C++</span>
+        <span class="f-tag">Sensors</span><span class="f-tag">PWM</span>
+        <span class="f-tag">Automation</span><span class="f-tag">Wokwi</span>
+      </div>
+    </div>
+    <div class="modules rv d3">
+      <div class="module"><div class="mod-code">MOD 01</div><div><div class="mod-title">Digital Sensing</div><div class="mod-desc">PIR sensors (P1, P2) produce HIGH/LOW signals — the foundation of any presence-detection or security system.</div></div></div>
+      <div class="module"><div class="mod-code">MOD 02</div><div><div class="mod-title">Analog & PWM Control</div><div class="mod-desc">LDR→analogRead→map→analogWrite pipeline (P4). Input_PULLUP button→PWM fan speed control (P5). Both demonstrate proportional output.</div></div></div>
+      <div class="module"><div class="mod-code">MOD 03</div><div><div class="mod-title">Ultrasonic Distance</div><div class="mod-desc">HC-SR04 timed pulse technique: distance = duration × 0.034 / 2. Applied in P3 for real-time tank level calculation.</div></div></div>
+      <div class="module"><div class="mod-code">MOD 04</div><div><div class="mod-title">Relay Automation</div><div class="mod-desc">Threshold-based bang-bang control in P3 — motor ON &lt;30%, OFF &gt;90%. Classic embedded automation pattern.</div></div></div>
+      <div class="module"><div class="mod-code">MOD 05</div><div><div class="mod-title">Wokwi Simulation</div><div class="mod-desc">All 5 projects run live in Wokwi. Click "▶ Wokwi Sim" on any project card to interact with the real circuit in your browser.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="eyebrow rv">03 — Skills</div>
+  <h2 class="rv d1">Technical <em>capabilities</em></h2>
+  <div class="sk-grid" id="sgrid">
+    <div class="sk-block rv"><div class="sk-name">Arduino / C++</div><div class="sk-bar"><div class="sk-fill" data-w="90"></div></div><div class="sk-pct">90%</div></div>
+    <div class="sk-block rv d1"><div class="sk-name">PIR Motion Sensing</div><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div><div class="sk-pct">88%</div></div>
+    <div class="sk-block rv d2"><div class="sk-name">Ultrasonic HC-SR04</div><div class="sk-bar"><div class="sk-fill" data-w="84"></div></div><div class="sk-pct">84%</div></div>
+    <div class="sk-block rv"><div class="sk-name">LDR / Analog Control</div><div class="sk-bar"><div class="sk-fill" data-w="86"></div></div><div class="sk-pct">86%</div></div>
+    <div class="sk-block rv d1"><div class="sk-name">PWM & Motor Control</div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div><div class="sk-pct">85%</div></div>
+    <div class="sk-block rv d2"><div class="sk-name">Wokwi Simulation</div><div class="sk-bar"><div class="sk-fill" data-w="93"></div></div><div class="sk-pct">93%</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="c-inner">
+    <div class="eyebrow rv" style="justify-content:center">04 — Contact</div>
+    <h2 class="rv d1" style="font-size:clamp(1.8rem,4vw,3rem)">Open to <em>collaboration</em></h2>
+    <p class="c-sub rv d2">Arduino, robotics, embedded systems — let's build something together.</p>
+    <a href="mailto:amlek@email.com" class="c-email rv d3">amlek@email.com</a>
+    <div class="soc-row rv">
+      <a href="https://wokwi.com/projects/458379522403678209" target="_blank" class="soc-a">P1 — PIR Detector</a>
+      <a href="https://wokwi.com/projects/457101324157519873" target="_blank" class="soc-a">P2 — Home Security</a>
+      <a href="https://wokwi.com/projects/457050155667043329" target="_blank" class="soc-a">P3 — Water Level</a>
+      <a href="https://wokwi.com/projects/458379892087600129" target="_blank" class="soc-a">P4 — LDR Brightness</a>
+      <a href="https://wokwi.com/projects/458380907208992769" target="_blank" class="soc-a">P5 — Fan Controller</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Amlek Chirayath Davis</span>
+  <span>Robotics &amp; Embedded Systems</span>
+  <span>Powered by Arduino &amp; Wokwi</span>
+</footer>
+
+<script>
+// ── Cursor
+const cur=document.getElementById('cur'),cring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(a);})();
+
+// ── Reveal
+const rObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');});},{threshold:.07});
+document.querySelectorAll('.rv').forEach(r=>rObs.observe(r));
+
+// ── Tabs
+function tab(el,proj,panel){
+  el.closest('.proj-card').querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  el.closest('.proj-card').querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(proj+'-'+panel).classList.add('active');
+}
+
+// ── Load Wokwi iframe simulation
+function loadSim(id, projectId){
+  const iframe=document.getElementById('if-'+id);
+  const overlay=document.getElementById('ov-'+id);
+  const btn=overlay.querySelector('.load-sim-btn');
+  // Show loading state
+  btn.textContent='⏳ Loading simulation…';
+  btn.style.opacity='.6';
+  btn.style.pointerEvents='none';
+  // Load the Wokwi project page directly (most compatible)
+  iframe.src='https://wokwi.com/projects/'+projectId;
+  iframe.onload=()=>{ overlay.classList.add('hidden'); };
+  // Fallback: hide overlay after 3s regardless
+  setTimeout(()=>overlay.classList.add('hidden'), 3000);
+}
+
+// ── Skill bars
+const sObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.sk-fill').forEach((b,i)=>setTimeout(()=>{b.style.width=b.dataset.w+'%';},i*100));sObs.unobserve(e.target);}});},{threshold:.3});
+document.querySelectorAll('#sgrid').forEach(g=>sObs.observe(g));
+
+// ── Counters
+function cnt(el,t){let n=0;const s=t/42,tm=setInterval(()=>{n=Math.min(n+s,t);el.textContent=Math.round(n)+(t>10?'+':'');if(n>=t)clearInterval(tm);},28);}
+const cObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-c]').forEach(el=>cnt(el,+el.dataset.c));cObs.unobserve(e.target);}});},{threshold:.5});
+document.querySelectorAll('.stats-bar').forEach(s=>cObs.observe(s));
+</script>
+</body>
+</html>
